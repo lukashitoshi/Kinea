@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            });
+        });
+        </script>
+
+    <form action="/investidorbanker/adicionar/{{ id }}" method="POST" class="cadastro">
+        <h1><strong>Adicionar Banker</strong></h1>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label class="select">
+                    <select required id="select" name="BankerId" style="color: #777;">
+                        <option selected disabled value="null">Banker</option>
+                        {% for banker in bankers %}
+                            <option value="{{ banker[0] }}" style="color: black;">
+                                {{ banker[1] }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

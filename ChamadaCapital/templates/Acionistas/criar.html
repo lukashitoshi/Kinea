@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.cnpj').mask('00.000.000/0000-00');
+    });
+</script>
+
+<style>
+    input.Nome {
+        background-size: 400px 100%;
+        width: 400px;
+        background-position: -400px 0;
+    }
+</style>
+
+    <form action="/criaracionista/{{ id }}?acionista={{ acionista }}" method="POST" class="cadastro">
+        <h1><strong>CADASTRO NOVO ACIONISTA</strong></h1>
+        <div class="row center">
+            <div class="col-sm-12 center">
+                <input class="Nome" placeholder="Nome" name='Nome' id='Nome' style="width: 400px;" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <input placeholder="CNPJ" name='Cnpj' id='Cnpj' class="cnpj" required>
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Banco" name='Banco' id='Banco' required>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <input placeholder="Agência" name='Agencia' id='Agencia' required>
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Conta Corrente" name='ContaCorrente' id='ContaCorrente' required>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <input placeholder="Itens Contrato" name='ItensContrato' id='ItensContrato' required>
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Cláusulas Contrato" name='ClausulasContrato' id='ClausulasContrato' required>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form> 
+
+{% endblock %}

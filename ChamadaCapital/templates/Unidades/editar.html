@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            }); 
+        });
+    </script>
+
+    <form action="/unidade/editar/{{ unidade[0] }}" method="POST" class="cadastro">
+        <h1><strong>CADASTRO NOVA UNIDADE</strong></h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Unidade</label>
+                <input placeholder="Unidade" name='Unidade' id='Unidade' value='{{ unidade[7] }}' style="margin-top: 0;" required aria-label="true">
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Andar</label>
+                <input placeholder="Andar" name='Andar' id='Andar' value='{{ unidade[2] }}' style="margin-top: 0;" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Bloco</label>
+                <input placeholder="Bloco" name='Bloco' id='Bloco' value='{{ unidade[3] }}' style="margin-top: 0;" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Área Privativa</label>
+                <input placeholder="Área (m²)" name='Area' id='Area' value='{{ unidade[4] }}' style="margin-top: 0;" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Valor</label>
+                <input placeholder="Valor" name='Valor' id='Valor' value='{{ unidade[5] }}' style="margin-top: 0;" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Status</label>
+                <label class="select">
+                    <select id="select" name="Status" style="color: black; border-bottom: solid 0.23em #000000; margin-top: 0;">
+                        <option selected disabled value="null">Status</option>
+                        {% for tipo in enumerables.StatusUnidade %}
+                            {% if tipo.value == unidade[6] %}
+                                <option value={{tipo.value}} style="color: black;" selected>{{ tipo.name }}</option>
+                            {% else %}
+                                <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </label>            
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form> 
+
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/content/fontawesome-free-5.15.1-web/css/all.css">
+    <script type=text/javascript src="/static/scripts/jquery-3.5.1.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "/static/content/app.css">
+    <link rel="shortcut icon" href="#">
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>    
+    <title>Kinea - Chamada de Capital</title>
+</head>
+
+<body style="margin: 0;" >
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135.02 48.08">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill:#000;
+                                    }
+                                </style>
+                            </defs>
+                            <title>Ativo 1</title>
+                            <g id="Camada_2" data-name="Camada 2">
+                                <g id="Layer_1" data-name="Layer 1">
+                                    <path class="cls-1" d="M0,0H3.37V23.93h.21C5,22.11,6.39,20.49,7.65,19L24.43,0H28.5l-18,20.07L30.18,47.3h-4l-18-24.92L3.37,27.72V47.3H0Z"/><rect class="cls-1" x="34.86" y="13.62" width="3.37" height="33.69"/><path class="cls-1" d="M46.55,13.62h3.27l0,6h0a12.68,12.68,0,0,1,11.58-6.81c3.23,0,11.79,1.62,11.79,14.25V47.3H69.83V27.37c0-6.17-2.39-11.72-9.34-11.72a10.81,10.81,0,0,0-10.11,7.79A11.85,11.85,0,0,0,50,26.38V47.3H46.59Z"/>
+                                    <path class="cls-1" d="M103.27,27.38c.07-4.71-1.89-11.72-10-11.72-7.44,0-10.59,6.52-11.23,11.72ZM81.79,30.1c0,10.75,5.9,15,12.85,15a19.55,19.55,0,0,0,9.33-1.9l.85,2.6c-1.27.7-4.71,2.17-10.6,2.17-9.69,0-15.72-7-15.72-16.92,0-11.23,6.46-18.25,15.16-18.25,11,0,13.13,10.39,13.13,15.23a8.42,8.42,0,0,1-.14,2Z"/>
+                                    <path class="cls-1" d="M131.64,29.27c-7.37-.22-17,.91-17,9,0,4.84,3.22,7,6.73,7a10.08,10.08,0,0,0,10-6.74,5.71,5.71,0,0,0,.34-2Zm3.38,18H131.6s0-3.47,0-4.6A13,13,0,0,1,121,48.08c-6.81,0-9.9-4.78-9.9-9.27,0-7.8,6.6-12.78,20.56-12.45v-.82c0-3.3-.63-10-8.63-9.89a14.68,14.68,0,0,0-8.49,2.52l-1.06-2.46a18.69,18.69,0,0,1,9.9-2.88c9.75,0,11.65,7.3,11.65,13.27Z"/><path class="cls-1" d="M34.14,6A2.84,2.84,0,1,1,37,8.88,2.83,2.83,0,0,1,34.14,6"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="nav navbar-nav">
+                            <li><a id="investimentos" href="{{ url_for('investimentos') }}">investimentos</a></li>
+                            <li><a id="investidores" href="{{ url_for('investidores') }}">investidores</a></li>
+                            <li><a id="bankers" href="{{ url_for('bankers') }}">bankers</a></li>
+                        </ul>
+                    </div>
+                    <!-- <div class="col-md-3 pull-right">
+                        <ul class="nav navbar-nav pull-right">
+                            <li><a href="#">usuários</a></li>
+                            <li><a href="#">sair</a></li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <footer>
+            <hr />
+            <p>Chamada de Capital - Kinea</p>
+        </footer>
+    </div>
+
+    {% block scripts %}
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="/static/scripts/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
+
+</body>
+</html>

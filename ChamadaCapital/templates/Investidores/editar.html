@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <style>
+        label.select::after {
+            top: 13px;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.cpf').mask('000.000.000-00');
+            $('.cnpj').mask('00.000.000/0000-00');
+            var tipo = $('#select').val();
+            if (tipo === '0') {
+                document.getElementById('Cpf').type = 'text';
+                document.getElementById('Cpf').removeAttribute('disabled');
+                document.getElementById('Cpf').setAttribute('required', 'true');
+                document.getElementById('Cpf').setAttribute('value', '{{ investidor[5] }}');
+            }            
+            if (tipo === '1') {
+                document.getElementById('Cnpj').type = 'text';
+                document.getElementById('Cnpj').removeAttribute('disabled');
+                document.getElementById('Cnpj').setAttribute('required', 'true');
+                document.getElementById('Cnpj').setAttribute('value', '{{ investidor[5] }}');
+            }
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+                if (current === '0') {
+                    document.getElementById('Cpf').type = 'text';
+                    document.getElementById('Cpf').removeAttribute('disabled');
+                    document.getElementById('Cpf').setAttribute('required', 'true');
+                    document.getElementById('Cnpj').type = 'hidden';
+                    document.getElementById('Cnpj').setAttribute('required', 'false');
+                    document.getElementById('Cnpj').setAttribute('disabled', 'true');
+                }
+                if (current === '1') {
+                    document.getElementById('Cnpj').type = 'text';
+                    document.getElementById('Cnpj').removeAttribute('disabled');
+                    document.getElementById('Cnpj').setAttribute('required', 'true');
+                    document.getElementById('Cpf').type = 'hidden';
+                    document.getElementById('Cpf').setAttribute('required', 'false');
+                    document.getElementById('Cpf').setAttribute('disabled', 'true');
+                }
+            } else {
+                $('#select').css('color','#777');
+            }
+            }); 
+        });
+        
+    </script>
+
+    <form action="/investidor/editar/{{ investidor[0] }}" method="POST" class="cadastro">
+        <h1><strong>EDITAR INVESTIDOR</strong></h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Nome</label>
+                <input placeholder="Nome" name='Nome' id='Nome' value='{{ investidor[1] }}' style="margin-top: 0;" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Banco</label>
+                <input placeholder="Banco" name='Banco' id='Banco' value='{{ investidor[2] }}' style="margin-top: 0;" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Agência</label>
+                <input placeholder="Agência" name='Agencia' id='Agencia' value='{{ investidor[3] }}' style="margin-top: 0;" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Conta Corrente</label>
+                <input placeholder="Conta Corrente" name='ContaCorrente' id='ContaCorrente' value='{{ investidor[4] }}' style="margin-top: 0;" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Tipo Pessoa</label>
+                <label class="select">
+                    <select required id="select" name="TipoPessoa" style="color: black; border-bottom: solid 0.23em #000000; margin-top: 0;">
+                        <option selected disabled value="null">Tipo Pessoa</option>
+                        {% for tipo in enumerables.TipoPessoa %}
+                            {% if tipo.value == investidor[6] %}
+                                <option value={{tipo.value}} style="color: black;" selected>{{ tipo.name }}</option>
+                            {% else %}
+                                <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">CPF/CNPJ</label>
+                <input style="margin-top: 0;" class="cpf" placeholder="CPF" name='CpfCnpj' id='Cpf' type="hidden" pattern=".{14,}" disabled>
+                <input style="margin-top: 0;" class="cnpj" placeholder="CNPJ" name='CpfCnpj' id='Cnpj' type="hidden" pattern=".{18,}" disabled>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">editar</button>
+        </div>
+    </form> 
+
+{% endblock %}

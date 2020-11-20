@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.date').mask('00/00/0000');
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            });
+        });
+    </script>
+
+    <style>
+        label.select, select#select {
+            background-size: 480px 100%;
+            width: 480px;
+            background-position: -480px 0;
+            max-width: unset;
+        }
+
+        label.select::after {
+            right: 0px;
+        }
+    </style>
+
+    <form action="/pagamento/adicionar/{{ id }}" method="POST" class="cadastro">
+        <h1><strong>Adicionar Aporte</strong></h1>
+        <div class="row center">
+            <div class="col-sm-12">
+                <label class="select">
+                    <select required id="select" name="ChamadaId" style="color: #777;">
+                        <option selected disabled value="null">Acionista - Investimento (Data de Envio do Email)</option>
+                        {% for chamada in chamadas %}
+                            <option value="{{ chamada[0] }}&{{ chamada[1] }}" style="color: black;">
+                                {{ chamada[2] }} - {{ chamada[3] }} ({{ chamada[5].strftime('%d/%m/%Y') }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <input class="money" placeholder="Valor" name='Valor' id='Valor' required>
+            </div>
+            <div class="col-sm-6">
+                <input class="date" placeholder="Data do Aporte" name='DataPagamento' id='DataPagamento' required>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

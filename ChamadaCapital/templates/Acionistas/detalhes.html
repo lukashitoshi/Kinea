@@ -1,0 +1,377 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script>
+        window.onclick = function(event) {
+            var modal1 = document.getElementById('id01');
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+            var modal2 = document.getElementById('id02');
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+            var modal3 = document.getElementById('id03');
+            if (event.target == modal3) {
+                modal3.style.display = "none";
+            }
+        }
+
+        function deleteacionista(id) {
+            document.getElementById('id01').style.display = 'block';
+            document.getElementById('confirm1-btn').href = '/acionista/excluir/' + id;
+        }
+        
+        function deletechamada(id) {
+            document.getElementById('id02').style.display = 'block';
+            document.getElementById('confirm2-btn').href = '/chamadaacionista/excluir/' + id;
+        }
+        
+        function removeinvestidor(id) {
+            document.getElementById('id03').style.display = 'block';
+            document.getElementById('confirm3-btn').href = '/investidoracionista/excluir/' + id;
+        }
+    </script>
+
+    <div id="id01" class="modal">
+        <div class="container">
+            <h2>EXCLUIR ACIONISTA</h2>
+            <p>realmente deseja excluir esse acionista?</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none'">cancelar</button>
+                <a id="confirm1-btn">
+                    <button type="button" class="deletebtn pull-right">excluir</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="id02" class="modal">
+        <div class="container">
+            <h2>EXCLUIR CHAMADA</h2>
+            <p>realmente deseja excluir essa chamada?</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn" onclick="document.getElementById('id02').style.display='none'">cancelar</button>
+                <a id="confirm2-btn">
+                    <button type="button" class="deletebtn pull-right">excluir</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="id03" class="modal">
+        <div class="container">
+            <h2>REMOVER INVESTIDOR</h2>
+            <p>realmente deseja remover esse investidor desse acionista?</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn" onclick="document.getElementById('id03').style.display='none'">cancelar</button>
+                <a id="confirm3-btn">
+                    <button type="button" class="deletebtn pull-right">excluir</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <header class="card-header" style="background-color: #4ba3c7; color: #fff;">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="card-title">Acionista</h1>
+                    <h3 style="text-transform: uppercase;">
+                        {{ acionista[2] }}
+                    </h3>
+                </div>
+                <div class="col-sm-2 pull-right">
+                    <a href="/acionista/editar/{{ acionista[0] }}">
+                        <button type="button" style="margin-bottom: 5px; width: 100%;">
+                            <i class="fas fa-edit" aria-hidden="true"></i> Editar
+                        </button>
+                    </a>
+                    <button type="button" style="width: 100%;" onclick="deleteacionista('{{ acionista[0] }}')">
+                        <i class="fas fa-trash" aria-hidden="true"></i> Excluir
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <strong>Banco</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        {{ acionista[3] }}
+                    </div>
+                    <div class="row">
+                        <strong>CNPJ</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        {{ acionista[7] }}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row">
+                        <strong>Agência</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        {{ acionista[4] }}
+                    </div>
+                    <div class="row">
+                        <strong>Conta Corrente</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        {{ acionista[5] }}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row">
+                        <strong>Investimento</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        <a href="/investimento/{{ acionista[10] }}">
+                            {{ acionista[11] }}
+                        </a>
+                    </div>
+                    <div class="row">
+                        <strong>Total Comprometido</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ acionista[21] }}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <strong>Valor Comprometido Equity</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ acionista[19] }}
+                    </div>
+                    <div class="row">
+                        <strong>Valor Comprometido Permuta</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ acionista[20] }}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <strong>Total Saldo Corrigido</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ acionista[22] }}
+                    </div>
+                    <div class="row">
+                        <strong>Total Valor Integralizado</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ acionista[23] }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    <h4>Chamadas</h4>
+    <div class="row" style="position: relative;">
+        <div class="col" style="width: 100%; height: 100%;">
+            <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                <a href="/chamadaacionista/criar/{{ acionista[0] }}" class="button">
+                    <button type="button">
+                        adicionar chamada
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table content-table">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Valor da Chamada</th>
+                <th scope="col">Tipo de Chamada</th>
+                <th scope="col">Data de Envio do Email</th>
+                <th scope="col">Data Limite da Chamada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chamada in chamadas %}
+                <tr>
+                    <td nowrap>
+                        <a href="/chamadaacionista/editar/{{ chamada[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <button type="button" class="icon-button" onclick="deletechamada('{{ chamada[0] }}')">
+                            <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                     <td>
+                        R$ {{ chamada[2] }}
+                    </td>
+                    <td>
+                        {{ enumerables.TipoChamada(chamada[3]).name }}
+                    </td>
+                    <td>
+                        {{ chamada[4].strftime("%d/%m/%Y") }}
+                    </td>
+                    <td>
+                        {{ chamada[5].strftime("%d/%m/%Y") }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+    <h4>Acionistas</h4>
+    <div class="row" style="position: relative;">
+        <div class="col" style="width: 100%; height: 100%;">
+            <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                <a href="/criaracionista/{{ acionista[1] }}?acionista={{ acionista[0] }}" class="button">
+                    <button type="button">
+                        adicionar acionista
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table content-table">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Banco</th>
+                <th scope="col">Agência</th>
+                <th scope="col">Conta Corrente</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ac in acionistas %}
+                <tr>
+                    <td nowrap>
+                        <a href="/acionista/editar/{{ ac[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <button type="button" class="icon-button" onclick="deleteacionista('{{ ac[0] }}')">
+                            <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                     <td>
+                        {{ ac[2] }}
+                    </td>
+                    <td>
+                        {{ ac[3] }}
+                    </td>
+                    <td>
+                        {{ ac[4] }}
+                    </td>
+                    <td>
+                        {{ ac[5] }}
+                    </td>
+                    <td>
+                        {{ ac[7][0:2] }}.***.***/****-**
+                    </td>
+                    <td nowrap>
+                        <a href="/acionista/{{ ac[0] }}" class="pull-right">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-briefcase icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   
+    <hr>
+    <h4>Investidores</h4>
+    <div class="row" style="position: relative;">
+        <div class="col" style="width: 100%; height: 100%;">
+            <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                <a href="/adicionarinvestidoracionista/{{ acionista[0] }}" class="button">
+                    <button type="button">
+                        adicionar investidor
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <table class="table content-table">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF/CNPJ</th>
+                <th scope="col" title="Participação Equity">% Eq.</th>
+                <th scope="col" title="Participação Permuta">% Per.</th>
+                <th scope="col" title="Valor Comprometido Equity">V.C.E.</th>
+                <th scope="col" title="Valor Comprometido Permuta">V.C.P.</th>
+                <th scope="col" title="Saldo Corrigido">S.C.</th>
+                <th scope="col" title="Valor Integralizado">V.I.</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for investidor in investidores %}
+                <tr>
+                    <td nowrap>
+                        <a href="/investidoracionista/editar/{{ investidor[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <button type="button" class="icon-button" onclick="removeinvestidor('{{ investidor[0] }}')">
+                            <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                     <td>
+                        {{ investidor[2] }}
+                    </td>
+                    <td>
+                        {{ investidor[3][0:3] }}.***.***-**
+                                               
+                    </td>
+                    <td>
+                        {{ investidor[8]|round(3) }} %
+                    </td>
+                    <td>
+                        {{ investidor[9]|round(3) }} %
+                    </td>
+                    <td>
+                        R$ {{ investidor[4] }}
+                    </td>
+                    <td>
+                        R$ {{ investidor[5] }}
+                    </td>
+                    <td>
+                        R$ {{ investidor[6] }}
+                    </td>
+                    <td>
+                        R$ {{ investidor[7] }}
+                    </td>
+                   
+                    <td nowrap>
+                        <a href="/investidor/{{ investidor[1] }}" class="pull-right">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-user icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+      
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.cnpj').mask('00.000.000/0000-00');
+    });
+</script>
+
+<style>
+    input.Nome {
+        background-size: 400px 100%;
+        background-position: -400px 0;
+    }
+</style>
+
+    <form action="/acionista/editar/{{ acionista[0] }}" method="POST" class="cadastro">
+        <h1><strong>EDITAR ACIONISTA</strong></h1>
+        <label style="margin: 40px 0 0 125px;">Nome</label>
+        <div class="row center">
+            <div class="col-sm-12 center">
+                <input class="Nome" placeholder="Nome" name='Nome' id='Nome' style="width: 400px; margin-top: 0;" value="{{ acionista[2] }}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">CNPJ</label>
+                <input placeholder="CNPJ" name='Cnpj' id='Cnpj' class="cnpj" style="margin-top: 0;" value="{{ acionista[7] }}" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Banco</label>
+                <input placeholder="Banco" name='Banco' id='Banco' style="margin-top: 0;" value="{{ acionista[3] }}" required>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Agência</label>
+                <input placeholder="Agência" name='Agencia' id='Agencia' style="margin-top: 0;" value="{{ acionista[4] }}" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Conta Corrente</label>
+                <input placeholder="Conta Corrente" name='ContaCorrente' id='ContaCorrente' style="margin-top: 0;" value="{{ acionista[5] }}" required>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Itens Contrato</label>
+                <input placeholder="Itens Contrato" name='ItensContrato' id='ItensContrato' style="margin-top: 0;" value="{{ acionista[8] }}" required>
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Cláusulas Contrato</label>
+                <input placeholder="Cláusulas Contrato" name='ClausulasContrato' id='ClausulasContrato' style="margin-top: 0;" value="{{ acionista[9] }}" required>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">editar</button>
+        </div>
+    </form> 
+
+{% endblock %}

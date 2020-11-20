@@ -1,0 +1,290 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    form.clear {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+</style>
+
+    <div class="card">
+        <header class="card-header" style="background-color: #cbba83; color: #fff;">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="card-title">Investimento</h1>
+                    <h3 style="text-transform: uppercase;">
+                        {{ investimento[1] }}
+                    </h3>
+                </div>
+                <div class="col-sm-2 pull-right">
+                    <a href="/investimento/editar/{{ investimento[0] }}">
+                        <button type="button" style="margin-bottom: 6px; width: 100%;">
+                            <i class="fas fa-edit" aria-hidden="true"></i> editar
+                        </button>
+                    </a>
+                    <a href="/investimento/excluir/{{ investimento[0] }}">
+                        <button type="button" style="margin-bottom: 6px; width: 100%;">
+                            <i class="fas fa-trash" aria-hidden="true"></i> excluir
+                        </button>
+                    </a>
+                    {% if investimento[8] == none %}
+                        <div>
+                            <form class="clear" action="/investimento/uploadestrutura/{{ investimento[0] }}" method="POST" enctype="multipart/form-data" style="height: 100%;">
+                                <label for="Estrutura" style="width: 100%; padding: 0; margin: 0;" class="upload" title="Upload da Estrutura">
+                                    <i class="fas fa-file-upload" aria-hidden="true" style="position: absolute; top: 14px; left: 45%"></i>
+                                </label>
+                                <input type="file" name="Estrutura" id="Estrutura" style="display: none;" onchange="this.form.submit()">
+                            </form>
+                        </div>
+                    {% else %}
+                        <a href="/static/estruturainvestimento/{{ investimento[8] }}" target="_blank">
+                            <button type="button" style="width: 100%; padding: 0;" title="Estrutura do Investimento">
+                                <i class="fas fa-file" aria-hidden="true"></i> estrutura
+                            </button>
+                        </a>
+                    {% endif %}
+                        
+                </div>
+            </div>
+        </header>
+        <div class="card-body">
+            <div class="col-sm-4">
+                <div class="row">
+                    <strong>CNPJ</strong>
+                </div>
+                <div class="row investimento-text">
+                    {{ investimento[2] }}
+                </div>
+                <div class="row">
+                    <strong>Razão Social</strong>
+                </div>
+                <div class="row investimento-text">
+                    {{ investimento[3] }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <strong>Incorporadora</strong>
+                </div>
+                <div class="row investimento-text">
+                    {{ investimento[7] }}
+                </div>
+                <div class="row">
+                    <strong>Índice de Correção</strong>
+                </div>
+                <div class="row investimento-text">
+                    {{ enumerables.TipoCorrecao(investimento[4]).name }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                
+                <div class="row">
+                    <strong>Data Início</strong>
+                </div>
+                <div class="row investimento-text">
+                    {{ investimento[5].strftime("%d/%m/%Y") }}
+
+                </div>
+                <div class="row">
+                    <strong>Data Término</strong>
+                </div>
+                <div class="row investimento-text">
+                    {{ investimento[6].strftime("%d/%m/%Y") }}
+
+                </div>
+
+            </div>
+            <div class="row"></div>
+        </div>
+    </div>
+
+    <hr>
+    <h4>Chamadas</h4>
+    <div class="row" style="position: relative;">
+        <div class="col" style="width: 100%; height: 100%;">
+            <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                <a href="/chamadainvestimento/criar/{{ investimento[0] }}" class="button">
+                    <button type="button">
+                        adicionar chamada
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table content-table">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Valor da Chamada</th>
+                <th scope="col">Tipo de Chamada</th>
+                <th scope="col">Data da Chamada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chamada in chamadas %}
+                <tr>
+                    <td nowrap>
+                        <a href="/chamadainvestimento/editar/{{ chamada[3] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <a href="/chamadainvestimento/excluir/{{ chamada[3] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                     <td>
+                        R$ {{ chamada[0] }}
+                    </td>
+                    <td>
+                        {{ enumerables.TipoChamada(chamada[1]).name }}
+                    </td>
+                    <td>
+                        {{ chamada[4].strftime("%d/%m/%Y") }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+    <h4>Acionistas</h4>
+    <div class="row" style="position: relative;">
+        <div class="col" style="width: 100%; height: 100%;">
+            <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                <a href="/criaracionista/{{ investimento[0] }}?acionista=" class="button">
+                    <button type="button">
+                        adicionar acionista
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table content-table">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Banco</th>
+                <th scope="col">Agência</th>
+                <th scope="col">Conta Corrente</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for acionista in acionistas %}
+                <tr>
+                    <td nowrap>
+                        <a href="/acionista/editar/{{ acionista[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <a href="/acionista/excluir/{{ acionista[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                     <td>
+                        {{ acionista[2] }}
+                    </td>
+                    <td>
+                        {{ acionista[3] }}
+                    </td>
+                    <td>
+                        {{ acionista[4] }}
+                    </td>
+                    <td>
+                        {{ acionista[5] }}
+                    </td>
+                    <td>
+                        {{ acionista[7] }}
+                    </td>
+                    <td nowrap>
+                        <a href="/acionista/{{ acionista[0] }}" class="pull-right">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-briefcase icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+    <h4>Unidades</h4>
+    <div class="row" style="position: relative;">
+        <div class="col" style="width: 100%; height: 100%;">
+            <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                <a href="/unidade/criar/{{ investimento[0] }}" class="button">
+                    <button type="button">
+                        adicionar unidade
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table content-table">
+        <thead>
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Unidade</th>
+                <th scope="col">Andar</th>
+                <th scope="col">Bloco</th>
+                <th scope="col">Área Privativa</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for unidade in unidades %}
+                <tr>
+                    <td nowrap>
+                        <a href="/unidade/editar/{{ unidade[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <a href="/unidade/excluir/{{ unidade[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                     <td>
+                        {{ unidade[7] }}
+                    </td>
+                    <td>
+                        {{ unidade[2] }}
+                    </td>
+                    <td>
+                        {{ unidade[3] }}
+                    </td>
+                    <td>
+                        {{ unidade[4] }} m²
+                    </td>
+                    <td>
+                        R$ {{ unidade[5] }}
+                    </td>
+                    <td nowrap>
+                        {{ enumerables.StatusUnidade(unidade[6]).name }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.cnpj').mask('00.000.000/0000-00');
+            $('.date').mask('00/00/0000');
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            }); 
+        });
+    </script>
+
+    <form action="/criarinvestimento" method="POST" class="cadastro">
+        <h1><strong>CADASTRO NOVO INVESTIMENTO</strong></h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <input placeholder="Nome" name='Nome' id='Nome' required>
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Incorporadora" name='Incorporadora' id='Incorporadora' required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <input class="cnpj" placeholder="CNPJ" name='Cnpj' id='Cnpj' required pattern=".{18,}">
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Razão Social" name='RazaoSocial' id='RazaoSocial' required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <input class="date" placeholder="Data Inicial" name='DataInicial' id='DataInicial' required>
+            </div>
+            <div class="col-sm-6">
+                <input class="date" placeholder="Data Término" name='DataTermino' id='DataTermino' required>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label class="select">
+                    <select required id="select" name="TipoCorrecao" style="color: #777;">
+                        <option selected disabled value="null">Índice Correção</option>
+                        {% for tipo in enumerables.TipoCorrecao %}
+                            <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>               
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+{% endblock %}

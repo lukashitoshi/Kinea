@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            $('.date').mask('00/00/0000');
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            }); 
+        });
+    </script>
+
+    <form action="/chamadaacionista/criar/{{ id }}" method="POST" class="cadastro">
+        <h1><strong>CADASTRO NOVA CHAMADA</strong></h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <input class="money" placeholder="Valor da Chamada" name='ValorChamada' id='ValorChamada' required>
+            </div>
+            <div class="col-sm-6">
+                <label class="select">
+                    <select required id="select" name="TipoChamada" style="color: #777;">
+                        <option selected disabled value="null">Tipo de Chamada</option>
+                        {% for tipo in enumerables.TipoChamada %}
+                            <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <input class="date" placeholder="Data de Envio do Email" name='DataEnvioEmail' id='DataEnvioEmail' required>
+            </div>
+            <div class="col-sm-6">
+                <input class="date" placeholder="Data Limite da Chamada" name='DataLimiteChamada' id='DataLimiteChamada' required>
+            </div>
+        </div>
+        <div class="row">
+            <label style="margin: 0 0 0 35px;">Texto do Corpo do E-mail</label>
+        </div>
+        <div class="row center">
+            <textarea placeholder="Texto do Corpo do Email" name="TextoEmail" id="TextoEmail" 
+                style=
+                "width: 490px;
+                max-width: 490px;
+                height: 190px;
+                border: none;
+                border-bottom: 1px solid #000;
+                margin-bottom: 20px;">{{ texto }}</textarea>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

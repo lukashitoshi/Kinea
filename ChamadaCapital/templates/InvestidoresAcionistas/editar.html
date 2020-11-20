@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            $('.date').mask('00/00/0000');
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            });
+        });
+    </script>
+
+    <form action="/investidoracionista/editar/{{ investidorAcionista[0] }}" method="POST" class="cadastro">
+        <h1><strong>Editar Investidor/Acionista</strong></h1>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Valor Comprometido Equity</label>
+                <input class="money" placeholder="Valor Comprometido Equity" name='ValorComprometidoEquity' id='ValorComprometidoEquity' value='{{ investidorAcionista[3] }}' style="margin-top: 0;" required> 
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Valor Comprometido Permuta</label>
+                <input class="money" placeholder="Valor Comprometido Permuta" name='ValorComprometidoPermuta' id='ValorComprometidoPermuta' value='{{ investidorAcionista[4] }}' style="margin-top: 0;" required> 
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Saldo Corrigido</label>
+                <input class="money" placeholder="Saldo Corrigido" name='SaldoCorrigido' id='SaldoCorrigido' value='{{ investidorAcionista[5] }}' style="margin-top: 0;" required> 
+            </div>
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Valor Integralizado</label>
+                <input class="money" placeholder="Valor Integralizado" name='ValorIntegralizado' id='ValorIntegralizado' value='{{ investidorAcionista[6] }}' style="margin-top: 0;" required> 
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Data Contrato</label>
+                <input class="date" placeholder="Data Contrato" name='DataContrato' id='DataContrato' value='{{ investidorAcionista[7].strftime("%d/%m/%Y") }}' style="margin-top: 0;" required> 
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <style>
+        label.select::after {
+            top: 13px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            $('.date').mask('00/00/0000');
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            }); 
+        });
+    </script>
+
+    <form action="/chamadainvestimento/editar/{{ chamadaInvestimento[3] }}" method="POST" class="cadastro">
+        <h1><strong>EDITAR CHAMADA</strong></h1>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Valor da Chamada</label>
+                <input class="money" value="{{ chamadaInvestimento[0] }}" placeholder="Valor da Chamada" name='ValorChamada' id='ValorChamada' style="margin-top: 0;" required>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Tipo de Chamada</label>
+                <label class="select">
+                    <select required id="select" name="TipoChamada" style="color: black; border-bottom: solid 0.23em #000000; margin-top: 0;">
+                        <option disabled value="null">Tipo de Chamada</option>
+                        {% for tipo in enumerables.TipoChamada %}
+                            {% if tipo.value == chamadaInvestimento[1] %}
+                                <option value={{tipo.value}} style="color: black;" selected>{{ tipo.name }}</option>
+                            {% else %}
+                                <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label style="margin: 20px 0 0 25px;">Data da Chamada</label>
+                <input class="date" value="{{ chamadaInvestimento[4].strftime('%d/%m/%Y') }}" placeholder="Data da Chamada" name='DataChamada' id='DataChamada' style="margin-top: 0;" required>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

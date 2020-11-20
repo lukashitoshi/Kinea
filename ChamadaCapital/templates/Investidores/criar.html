@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.cpf').mask('000.000.000-00');
+        $('.cnpj').mask('00.000.000/0000-00');
+        $('#select').change(function() {
+        var current = $('#select').val();
+        if (current != 'null') {
+            $('#select').css('color','black');
+            $('#select').css('border-bottom', 'solid 0.23em #000000');
+            if (current === '0') {
+                document.getElementById('Cpf').type = 'text';
+                document.getElementById('Cpf').removeAttribute('disabled');
+                document.getElementById('Cpf').setAttribute('required', 'true');
+                document.getElementById('Cnpj').type = 'hidden';
+                document.getElementById('Cnpj').setAttribute('required', 'false');
+                document.getElementById('Cnpj').setAttribute('disabled', 'true');
+                document.getElementById('CpfCnpj').type = 'hidden';
+            }
+            if (current === '1') {
+                document.getElementById('Cnpj').type = 'text';
+                document.getElementById('Cnpj').removeAttribute('disabled');
+                document.getElementById('Cnpj').setAttribute('required', 'true');
+                document.getElementById('Cpf').type = 'hidden';
+                document.getElementById('Cpf').setAttribute('required', 'false');
+                document.getElementById('Cpf').setAttribute('disabled', 'true');
+                document.getElementById('CpfCnpj').type = 'hidden';
+            }
+        } else {
+            $('#select').css('color','#777');
+        }
+        }); 
+    });
+</script>
+
+    <form action="/investidor/criar" method="POST" class="cadastro">
+        <h1><strong>CADASTRO NOVO INVESTIDOR</strong></h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <input placeholder="Nome" name='Nome' id='Nome' required>
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Banco" name='Banco' id='Banco' required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <input placeholder="Agência" name='Agencia' id='Agencia' required>
+            </div>
+            <div class="col-sm-6">
+                <input placeholder="Conta Corrente" name='ContaCorrente' id='ContaCorrente' required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="select">
+                    <select required id="select" name="TipoPessoa" style="color: #777;">
+                        <option selected disabled value="null">Tipo Pessoa</option>
+                        {% for tipo in enumerables.TipoPessoa %}
+                            <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+            <div class="col-sm-6">
+                <input id="CpfCnpj" placeholder="CPF/CNPJ" disabled>
+                <input class="cpf" placeholder="CPF" name='CpfCnpj' id='Cpf' type="hidden" pattern=".{14,}" disabled>
+                <input class="cnpj" placeholder="CNPJ" name='CpfCnpj' id='Cnpj' type="hidden" pattern=".{18,}" disabled>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form> 
+
+{% endblock %}

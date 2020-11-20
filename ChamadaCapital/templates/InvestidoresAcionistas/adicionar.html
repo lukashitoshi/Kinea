@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            $('.date').mask('00/00/0000');
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            });
+        });
+    </script>
+
+    <form action="/adicionarinvestidoracionista/{{ id }}" method="POST" class="cadastro">
+        <h1><strong>Adicionar Investidor</strong></h1>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label class="select">
+                    <select required id="select" name="InvestidorId" style="color: #777;">
+                        <option selected disabled value="null">Investidor - CPF/CNPJ</option>
+                        {% for investidor in listaInvestidores %}
+                            <option value="{{ investidor[0] }}" style="color: black;">
+                                {% if investidor[3] == 0 %}
+                                    {{ investidor[1] }} - {{ investidor[2][0:3] }}.XXX.XXX-XX
+                                {% endif %}
+                                {% if investidor[3] == 1 %}
+                                    {{ investidor[1] }} - {{ investidor[2][0:2] }}.XXX.XXX/XXXX-XX
+                                {% endif %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+            <div class="col-sm-6">
+                <input class="date" placeholder="Data Contrato" name='DataContrato' id='DataContrato' required> 
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <input class="money" placeholder="Valor Comprometido Equity" name='ValorComprometidoEquity' id='ValorComprometidoEquity' required> 
+            </div>
+            <div class="col-sm-6">
+                <input class="money" placeholder="Valor Comprometido Permuta" name='ValorComprometidoPermuta' id='ValorComprometidoPermuta' required> 
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

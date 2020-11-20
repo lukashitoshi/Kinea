@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="card" style="padding-bottom: 0;">
+        <header class="card-header" style="background-color: #cb9b8c; color: #fff;">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="card-title">Banker</h1>
+                    <h3 style="text-transform: uppercase;">
+                        {{ banker[1] }}
+                    </h3>
+                </div>
+                <div class="col-sm-2 pull-right">
+                    <a href="/banker/editar/{{ banker[0] }}">
+                        <button type="button" style="margin-bottom: 5px; width: 100%;">
+                            <i class="fas fa-edit" aria-hidden="true"></i> Editar
+                        </button>
+                    </a>
+                    <a href="/banker/excluir/{{ banker[0] }}">
+                        <button type="button" style="width: 100%;">
+                            <i class="fas fa-trash" aria-hidden="true"></i> Excluir
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <strong>Total Comprometido</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ banker[2] }}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row">
+                        <strong>Total Investido</strong>
+                    </div>
+                    <div class="row investimento-text">
+                        R$ {{ banker[3] }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-md-7">
+            <h4>Contatos</h4>
+            <div class="row" style="position: relative;">
+                <div class="col" style="width: 100%; height: 100%;">
+                    <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                        <a href="/banker/conexao/criar/{{ banker[0] }}" class="button">
+                            <button type="button">
+                                cadastrar contato
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="table content-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Ações</th>
+                        <th scope="col">Tipo Contato</th>
+                        <th scope="col">Contato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for conexao in conexoes %}
+                    <tr>
+                        <td nowrap>
+                            <a href="/banker/conexao/editar/{{ conexao[0] }}">
+                                <button type="button" class="icon-button">
+                                    <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                            <a href="/banker/conexao/excluir/{{ conexao[0] }}">
+                                <button type="button" class="icon-button">
+                                    <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            {{ enumerables.TipoContato(conexao[3]).name }}
+                        </td>
+                        <td>
+                            {{ conexao[4] }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <h4>Investidores</h4>
+            <table class="table content-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Ações</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CPF/CNPJ</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for investidor in investidores %}
+                        <tr>
+                            <td nowrap>
+                                <a href="/investidorbanker/excluir/{{ investidor[0] }}?bi=b">
+                                    <button type="button" class="icon-button">
+                                        <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                {{ investidor[2] }}
+                            </td>
+                            <td>
+                                {{ investidor[3][0:3] }}.***.***-**                
+                            </td>
+                            <td nowrap>
+                                <a href="/investidor/{{ investidor[1] }}">
+                                    <button type="button" class="icon-button">
+                                        <i class="fas fa-user icon-i" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    
+
+      
+{% endblock %}

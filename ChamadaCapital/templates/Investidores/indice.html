@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script>
+        // fechar modal delete
+        window.onclick = function(event) {
+            var modal = document.getElementById('id01');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // botão modal delete
+        function deletefunction(id) {
+            document.getElementById('id01').style.display = 'block';
+            document.getElementById('id02').href = '/investidor/excluir/' + id;
+        }
+    </script>
+
+    <main>
+        <div id="id01" class="modal">
+            <div class="container">
+                <h2>EXCLUIR INVESTIDOR</h2>
+                <p>realmente deseja excluir esse investidor?</p>
+        
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none'">cancelar</button>
+                    <a id="id02">
+                        <button type="button" class="deletebtn pull-right">excluir</button>
+                    </a>
+                </div>
+            </div>
+        </div> 
+
+        <h2>Investidores</h2>
+
+        <hr>
+            
+        <div class="row" style="position: relative;">
+            <div class="col" style="width: 100%; height: 100%;">
+                <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                    <a href="/investidor/criar" class="button"><button type="button">cadastrar</button></a>
+                </div>
+            </div>
+        </div>
+            
+        
+        <table class="table content-table">
+            <thead>
+                <tr>
+                    <th scope="col">Ações</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Banco</th>
+                    <th scope="col">Agencia</th>
+                    <th scope="col">Conta Corrente</th>
+                    <th scope="col">CPF/CNPJ</th>
+                    <th scope="col">Tipo Pessoa</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for investidor in investidores %}
+                <tr>
+                    <th scope="row">
+                        <a href="/investidor/editar/{{ investidor[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <button type="button" class="icon-button" onclick="deletefunction('{{ investidor[0] }}')">
+                            <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                        </button>
+                    </th>
+                    <td>
+                        {{ investidor[1:][0] }}
+                    </td>
+                    <td>
+                        {{ investidor[1:][1] }}
+                    </td>
+                    <td>
+                        {{ investidor[1:][2] }}
+                    </td>
+                    <td>
+                        {{ investidor[1:][3] }}
+                    </td>
+                    <td>
+                        {% if investidor[1:][5] == 0 %}
+                            {{ investidor[1:][4][0:3] }}.***.***-**
+                        {% endif %}
+                        {% if investidor[1:][5] == 1 %}
+                            {{ investidor[1:][4][0:2] }}.***.***/****-**
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ enumerables.TipoPessoa(investidor[6]).name }}
+                    </td>
+                    <td>
+                        <a href="/investidor/{{ investidor[0] }}" class="pull-right">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-user icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </main>
+    
+{% endblock %}

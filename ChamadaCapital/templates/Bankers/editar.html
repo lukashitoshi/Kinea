@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <style>
+        input.Nome {
+            width: 400px;
+            background-position: -400px 0;
+            background-size: 400px 100%;
+            margin-top: 0;
+        }
+    </style>
+
+    <form action="/banker/editar/{{ banker[0] }}" method="POST" class="cadastro">
+        <h1><strong>EDITAR BANKER</strong></h1>
+        <label style="margin: 40px 0 0 125px;">Nome</label>
+        <div class="row center">
+            <div class="col-sm-12 center">
+                <input class="Nome" placeholder="Nome" name='Nome' id='Nome' value='{{ banker[1] }}' required>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">editar</button>
+        </div>
+    </form> 
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#select').change(function() {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#select').css('color','black');
+                $('#select').css('border-bottom', 'solid 0.23em #000000');
+            } else {
+                $('#select').css('color','#777');
+            }
+            }); 
+        });
+    </script>
+
+    <form action="/banker/conexao/criar/{{ id }}" method="POST" class="cadastro">
+        <h1><strong>CADASTRO NOVO CONTATO</strong></h1>
+        <div class="row center">
+            <div class="col-sm-6">
+                <label class="select">
+                    <select required id="select" name="TipoContato" style="color: #777;">
+                        <option selected disabled value="null">Tipo de Contato</option>
+                        {% for tipo in enumerables.TipoContato %}
+                            <option value={{tipo.value}} style="color: black;">{{ tipo.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>        
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-sm-6">
+                <input placeholder="Contato" name='Contato' id='Contato' required>
+            </div>
+        </div>
+        <div class="center">
+            <button type="submit">cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}

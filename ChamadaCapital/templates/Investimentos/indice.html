@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <script>
+        $(document).ready(function() {
+            document.getElementById('investimentos').setAttribute('active')
+            document.getElementById('bankers').removeAttribute('active')
+            document.getElementById('investidores').removeAttribute('active')
+        });
+    
+        // fechar modal delete
+        window.onclick = function(event) {
+            var modal = document.getElementById('id01');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // botão modal delete
+        function deletefunction(id) {
+            document.getElementById('id01').style.display = 'block';
+            document.getElementById('id02').href = '/investimento/excluir/' + id;
+        }
+    </script>
+
+    <main>
+
+        <div id="id01" class="modal">
+            <div class="container">
+                <h2>EXCLUIR INVESTIMENTO</h2>
+                <p>realmente deseja excluir esse investimento?</p>
+        
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none'">cancelar</button>
+                    <a id="id02">
+                        <button type="button" class="deletebtn pull-right">excluir</button>
+                    </a>
+                </div>
+            </div>
+        </div> 
+
+        <h2>Investimentos</h2>
+    
+    
+        <hr>
+        
+        <div class="row" style="position: relative;">
+            <div class="col" style="width: 100%; height: 100%;">
+                <div class="row pull-right pull-bottom" style="padding-right: 30px;">
+                    <a href="/criarinvestimento" class="button"><button type="button">cadastrar</button></a>
+                </div>
+            </div>
+        </div>
+        
+        <table class="table content-table">
+            <thead>
+                <tr>
+                    <th scope="col">Ações</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Razão Social</th>
+                    <th scope="col">Índice Correção</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for investimento in investimentos %}
+                <tr>
+                    <th scope="row">
+                        <a href="/investimento/editar/{{ investimento[0] }}">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-edit icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <button type="button" class="icon-button" onclick="deletefunction('{{ investimento[0] }}')">
+                            <i class="fas fa-trash icon-i" aria-hidden="true"></i>
+                        </button>
+                    </th>
+                    <td>
+                        {{ investimento[1:7][0] }}
+                    </td>
+                    <td>
+                        {{ investimento[1:7][1] }}
+                    </td>
+                    <td>
+                        {{ investimento[1:7][2] }}
+                    </td>
+                    <td>
+                        {{ enumerables.TipoCorrecao(investimento[1:7][3]).name }}
+                    </td>
+                    <td>
+                        <a href="/investimento/{{ investimento[0] }}" class="pull-right">
+                            <button type="button" class="icon-button">
+                                <i class="fas fa-dollar-sign icon-i" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+    </main>
+{% endblock %}

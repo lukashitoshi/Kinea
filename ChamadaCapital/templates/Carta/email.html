@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+        <link rel="stylesheet" href="/static/content/fontawesome-free-5.15.1-web/css/all.css">
+        <script type=text/javascript src="/static/scripts/jquery-3.5.1.min.js"></script>
+        <link rel= "stylesheet" type= "text/css" href= "/static/content/app.css">
+        <link rel="shortcut icon" href="#">
+        <script src="/static/scripts/modernizr-2.6.2.js"></script>    
+        <title>Kinea - Chamada de Capital</title>
+    </head>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #59596d;
+            padding: 20px;
+            text-align: justify;
+        }
+
+        h1 {
+            color: #171f38;
+        }
+
+        hr.linha-grossa {
+            border: 4px solid #171f38;
+        }
+
+        div.fale-conosco {
+            background-color: #171f38;
+            color: #fff;
+            padding: 30px;
+        }
+
+        div.fale-conosco h1 {
+            margin-top: 0;
+            color: #fff;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        p.body-text {
+            margin: 20px;
+        }
+        img {
+            padding: 20px;
+        }
+
+    </style>
+    <body>
+        <hr class="linha-grossa">
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="/static/content/imagens/logo-email.png">
+            </div>
+            <div class="col-sm-6" style="padding: 20px;">
+                <p class="pull-right"><strong>ref. {{ data.strftime("%b/%Y") }}</strong></p>
+            </div>
+        </div>
+        <hr>
+
+        <h1>
+            Chamada de Capital
+        </h1>
+        {% for txt in texto %}
+            <p class="body-text">
+                {{ txt }}
+            </p>
+        {% endfor %}
+        <div class="row" style="padding: 20px;">
+            <div class="col-sm-6">
+                <img src="/static/content/imagens/como-investir.png">
+                <img src="/static/content/imagens/anbima.png">
+            </div>
+            <div class="col-sm-6">
+                <img class="pull-right" src="/static/content/imagens/uma-empresa-itau.png">
+            </div>
+        </div>
+
+        <div class="fale-conosco">
+            <h1>
+                <strong>
+                    Fale Conosco
+                </strong>
+            </h1>
+            <h3>
+                <strong>E-mail</strong>
+            </h3>
+            <h3 style="margin-bottom: 20px;">
+                relacionamento@kinea.com.br
+            </h3>
+            <p>
+                Kinea Investimentos @ {{ data.strftime("%Y") }} - Todos Direitos Reservados Termos de Uso e Política de Privacidade
+            </p>
+            <p>
+                Este material foi elaborado pela Kinea (Kinea Investimentos Ltda e Kinea Private Equity 
+                Investimentos S.A.), empresa do Grupo Itaú Unibanco. A Kinea não comercializa e nem distribui 
+                cotas de fundos de investimentos. Leia o regulamento e demais documentos legais do fundo antes 
+                de investir. Os fundos são supervisionados e fiscalizados pela Comissão de Valores Mobiliários 
+                – CVM. Os fundos de condomínio aberto e não destinados a investidores qualificados possuem lâminas 
+                de informações essenciais. A descrição do tipo ANBIMA consta no formulário de informações 
+                complementares. Estes documentos podem ser consultados no site da CVM http://www.cvm.gov.br/
+                ou no site dos respectivos Administradores dos fundos. Não há garantia de tratamento tributário 
+                de longo prazo para os fundos que informam buscar este tratamento no regulamento. Os fundos da 
+                Kinea não são registrados nos Estados Unidos da América sob o Investment Company Act de 1940 ou 
+                sob o Securities Act de 1933. Não podem ser oferecidos ou vendidos nos Estados Unidos da América 
+                ou em qualquer um de seus territórios, possessões ou áreas sujeitas a sua jurisdição, ou a pessoas 
+                que sejam consideradas como U.S. Persons para fins da regulamentação de mercado de capitais 
+                norte-americana. Os Fundos de Investimento da Kinea podem apresentar um alto grau de volatilidade 
+                e risco. Alguns fundos informam no regulamento que utilizam estratégias com derivativos como parte 
+                de sua política de investimento, que da forma que são adotadas, podem resultar em perdas de patrimônio 
+                financeiro para seus cotistas superiores ao capital aplicado, obrigando o cotista a aportar recursos 
+                adicionais para cobertura do fundo. É recomendada uma avaliação de performance de fundos de 
+                investimento em análise de no mínimo 12 meses. A rentabilidade passada não garante a rentabilidade 
+                futura e fundos de investimento não são garantidos pela Instituição Administradora, ou por qualquer 
+                mecanismo de seguro, ou ainda pelo Fundo Garantidor de Créditos – FGC. Os Fundos de Investimento em 
+                Participações seguem a ICVM 578, portanto são condomínios fechados em que as cotas somente são 
+                resgatadas ao término do prazo de duração do fundo. Esta modalidade concentra a carteira
+                em poucos ativos de baixa liquidez, o que pode resultar em perdas de patrimônio financeiro para seus 
+                cotistas que podem superar o capital aplicado, acarretando na obrigatoriedade do cotista aportar 
+                recursos adicionais para cobertura do fundo no caso de resultado negativo. Os Fundos de Investimento 
+                Imobiliário seguem a ICVM472, portanto são condomínios fechados em que as cotas não são resgatáveis 
+                onde os cotistas podem ter dificuldade em alienar suas cotas no mercado secundário. Os Fundos de 
+                Investimento em Direitos Creditórios seguem a ICVM356, portanto são condomínios abertos ou fechados, 
+                sendo que: (i) quando condomínios abertos, o resgate das cotas está condicionado à disponibilidade de 
+                caixa do fundo; e (ii) quando condomínios fechados, em que as cotas não são resgatáveis, os cotistas 
+                podem ter dificuldade em alienar suas cotas no mercado secundário. As opiniões, estimativas e projeções 
+                refletem o atual julgamento do responsável pelo seu conteúdo na data de sua divulgação e estão, 
+                portanto, sujeitas a alterações sem aviso prévio. As projeções utilizam dados históricos e suposições, 
+                de forma que devem ser realizadas as seguintes advertências: (1) Não estão livres de erros; (2) Não é 
+                possível garantir que os cenários obtidos venham efetivamente a ocorrer; (3) Não configuram, em nenhuma 
+                hipótese, promessa ou garantia de retorno esperado nem de exposição máxima de perda; e (4) Não devem ser 
+                utilizadas para embasar nenhum procedimento administrativo perante órgãos fiscalizadores ou reguladores. 
+                Este conteúdo é informativo e não constitui nem deve ser interpretado como oferta ou solicitação de compra 
+                ou venda de valores mobiliários, instrumento financeiro ou de participação em qualquer estratégia de 
+                negócios específica, qualquer que seja a jurisdição. Algumas das informações aqui contidas foram obtidas 
+                com base em dados de mercado e de fontes públicas consideradas confiáveis. O Grupo Itaú Unibanco e a Kinea 
+                não declaram ou garantem, de forma expressa ou implícita, a integridade, confiabilidade ou exatidão de 
+                tais informações e se eximem de qualquer responsabilidade por quaisquer prejuízos, diretos ou indiretos, 
+                que venham a decorrer da utilização desse material e de seu conteúdo. Esse material não pode ser reproduzido 
+                ou redistribuído para qualquer pessoa, no todo ou em parte, qualquer que seja o propósito, sem o prévio 
+                consentimento por escrito da Kinea. Quaisquer outras informações ou esclarecimentos sobre o Fundo poderão 
+                ser obtidos com o Administrador e o Gestor, através do e-mail: relacionamento@kinea.com.br
+            </p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    </body>
+</html>
